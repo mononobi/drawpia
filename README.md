@@ -6,7 +6,7 @@ A simple command line tool for performing draws.
 - Ability to set a `restricted_level` for each entry to be able to distribute such 
   entries on different groups without putting two entries with the same restricted 
   level in the same group (if it's not possible, an error would be raised).
-- Ability to set a `optional_level` for each entry to be able to try to distribute 
+- Ability to set an `optional_level` for each entry to be able to try to distribute 
   such entries on different groups without putting two entries with the same optional
   level in the same group (if it's actually possible, otherwise optional level would 
   be ignored).
