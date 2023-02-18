@@ -2,7 +2,7 @@
 A simple command line tool for performing draws.
 
 # features
-- Performing a draw between unlimited amount of entries into different group sizes.
+- Performing a draw between unlimited number of entries with different group sizes.
 - Ability to set a `restricted_level` for each entry to be able to distribute such 
   entries on different groups without putting two entries with the same restricted 
   level in the same group (if it's not possible, an error would be raised).
