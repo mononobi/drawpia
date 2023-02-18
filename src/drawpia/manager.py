@@ -46,6 +46,9 @@ class Group:
         if self.is_full:
             raise ValueError(f'Group [{self._name}] is full with [{self._size}] entries.')
 
+        if entry in self._entries:
+            raise ValueError(f'Entry {entry} is already added to group [{self._name}]')
+
         self._entries.append(entry)
 
     def has_restricted(self, restricted_level):
@@ -239,8 +242,8 @@ class Manager:
                     picked.append(selected)
                     sources.remove(selected)
 
+        sources = list(self._extractor.entries)
         while len(picked) < self._extractor.count:
-            sources = list(self._extractor.entries)
             for group in groups:
                 if len(sources) <= 0:
                     break
