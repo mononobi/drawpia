@@ -268,7 +268,8 @@ class Manager:
                     if group.is_full or group.has_restricted(level):
                         continue
 
-                    selected = self._select(sources, group, picked)
+                    selected = self._select(sources, group, picked,
+                                            is_optional=True)
                     if not selected:
                         continue
 
