@@ -22,7 +22,7 @@ You should first fill this file with real data:
   - `Name + Restricted Level + Optional Level`
 
 
-  There are two sample files which can be used to get familiar with the data structure:
+  There are three sample files which can be used to get familiar with the data structure:
   - **files/samples/entries.sample1.txt**: Contains a sample data with only `name`.
   - **files/samples/entries.sample2.txt**: Contains a sample data with only `name + restricted level`.
   - **files/samples/entries.sample3.txt**: Contains a sample data with mixed entry structures.
