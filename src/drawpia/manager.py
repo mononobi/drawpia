@@ -208,6 +208,43 @@ class Manager:
         print('Number Of Groups:')
         print(self._total_groups)
 
+    def _select(self, entries, group, picked,
+                is_restricted=False, is_optional=False):
+        """
+        selects a random entry from the list of entries and returns it.
+
+        it returns None if no entry can be selected and the entries list is exhausted.
+
+        :param list[Entry] entries: list of entries to pick from.
+        :param Group group: the corresponding group to pick an entry for it.
+        :param list[Entry] picked: global list of already picked entries.
+
+        :param bool is_restricted: specifies that the provided group should not have
+                                   any other entry with the same restricted level as
+                                   the selected entry.
+
+        :param bool is_optional: specifies that the provided group should not have
+                                 any other entry with the same optional level as
+                                 the selected entry.
+
+        :rtype: Entry
+        """
+
+        reduced_entries = list(entries)
+        if not reduced_entries:
+            return None
+
+        selected = random.choice(reduced_entries)
+        if (is_restricted and group.has_restricted(selected.restricted_level)) or \
+                (is_optional and group.has_optional(selected.optional_level)):
+            reduced_entries.remove(selected)
+            return self._select(reduced_entries, group, picked,
+                                is_restricted, is_optional)
+
+        group.add(selected)
+        picked.append(selected)
+        return selected
+
     def _draw(self):
         """
         performs a draw and gets the groups list.
@@ -231,9 +268,10 @@ class Manager:
                     if group.is_full or group.has_restricted(level):
                         continue
 
-                    selected = random.choice(sources)
-                    group.add(selected)
-                    picked.append(selected)
+                    selected = self._select(sources, group, picked)
+                    if not selected:
+                        continue
+
                     sources.remove(selected)
 
         if self._extractor.has_optional:
@@ -246,14 +284,18 @@ class Manager:
                     if group.is_full or group.has_optional(level):
                         continue
 
-                    selected = random.choice(sources)
-                    if group.has_restricted(selected.restricted_level):
+                    selected = self._select(sources, group, picked,
+                                            is_restricted=True)
+                    if not selected:
                         continue
 
-                    group.add(selected)
-                    picked.append(selected)
                     sources.remove(selected)
 
+        # we should first enforce that no entries with the same optional level put
+        # in the same group. but if all groups have been processed 10 times and
+        # there were still some groups without enough entries, we lift the optional
+        # level enforcement to be able to fill all groups.
+        tried_optional = 0
         sources = list(set(self._extractor.entries).difference(set(picked)))
         while len(picked) < self._extractor.count:
             for group in groups:
@@ -263,13 +305,15 @@ class Manager:
                 if group.is_full:
                     continue
 
-                selected = random.choice(sources)
-                if group.has_restricted(selected.restricted_level):
+                selected = self._select(sources, group, picked,
+                                        is_restricted=True,
+                                        is_optional=tried_optional < 10)
+                if not selected:
                     continue
 
-                group.add(selected)
-                picked.append(selected)
                 sources.remove(selected)
+
+            tried_optional += 1
 
         return groups
 

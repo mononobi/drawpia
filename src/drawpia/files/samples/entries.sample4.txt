@@ -1,0 +1,16 @@
+Manchester United[***]1[***]England
+Arsenal[***]1[***]England
+Manchester City[***]2[***]England
+Inter Milan[***]1[***]Italy
+Juventus[***]1[***]Italy
+AC Milan[***]1[***]Italy
+Barcelona[***]1[***]Spain
+Real Madrid[***]1[***]Spain
+Atletico Madrid[***]2[***]Spain
+Lyon[***]2[***]France
+Ajax[***]2[***]Netherlands
+Porto[***]2[***]Portugal
+Rangers[***]2[***]Scotland
+Fenerbahce[***]2[***]Turkey
+Bayern Munich[***]1[***]Germany
+Bayer Leverkusen[***]2[***]Germany

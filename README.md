@@ -15,17 +15,21 @@ You should first fill this file with real data:
 - **files/entries.txt**: Contains the name, restricted level and optional level
   of each entry. `restricted level` and `optional level` are not mandatory but
   each entry can have them if needed.
-  
+
   These combinations are possible for each entry:
   - `Name`
   - `Name + Restricted Level`
   - `Name + Restricted Level + Optional Level`
 
+  Note that if you only want to have `optional level` without `restricted level`, you can 
+  set a unique `restricted level` per each entry to make it non-effective.
 
-  There are three sample files which can be used to get familiar with the data structure:
+
+  There are four sample files which can be used to get familiar with the data structure:
   - **files/samples/entries.sample1.txt**: Contains a sample data with only `name`.
   - **files/samples/entries.sample2.txt**: Contains a sample data with only `name + restricted level`.
   - **files/samples/entries.sample3.txt**: Contains a sample data with mixed entry structures.
+  - **files/samples/entries.sample4.txt**: Contains a real sample data for drawing 16 football teams in groups of 2.
 
 # run
 python3 run.py
