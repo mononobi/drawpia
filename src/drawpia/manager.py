@@ -268,6 +268,8 @@ class Manager:
                     if group.is_full or group.has_restricted(level):
                         continue
 
+                    # we should prevent entries with the same optional
+                    # level to be put in the same group.
                     selected = self._select(sources, group, picked,
                                             is_optional=True)
                     if not selected:
@@ -285,6 +287,8 @@ class Manager:
                     if group.is_full or group.has_optional(level):
                         continue
 
+                    # we should prevent entries with the same restricted
+                    # level to be put in the same group.
                     selected = self._select(sources, group, picked,
                                             is_restricted=True)
                     if not selected:
