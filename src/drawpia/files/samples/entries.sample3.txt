@@ -1,0 +1,8 @@
+name_1[***]restricted_level_a[***]optional_level_x
+name_2[***]restricted_level_a[***]optional_level_x
+name_3[***]restricted_level_a[***]optional_level_y
+name_4[***]restricted_level_a[***]optional_level_y
+name_5[***]restricted_level_c
+name_6[***]restricted_level_c
+name_7
+name_8

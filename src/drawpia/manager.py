@@ -3,7 +3,6 @@
 import random
 
 from drawpia.extractor import Extractor, Entry
-from drawpia.settings import GROUP_SIZE
 
 
 class Group:
@@ -60,6 +59,9 @@ class Group:
         :rtype: bool
         """
 
+        if not restricted_level:
+            return False
+
         for item in self._entries:
             if item.restricted_level == restricted_level:
                 return True
@@ -74,6 +76,9 @@ class Group:
 
         :rtype: bool
         """
+
+        if not optional_level:
+            return False
 
         for item in self._entries:
             if item.optional_level == optional_level:
@@ -147,25 +152,25 @@ class Manager:
         super().__init__()
 
         self._extractor = Extractor()
-        self._total_groups, self._group_size = self._validate()
+        self._total_groups = None
+        self._group_size = None
 
-    def _validate(self):
+    def _validate(self, group_size):
         """
-        validates the drawing parameters and returns the validated total groups and group size.
+        validates the drawing parameters.
 
-        :returns: int total_groups, int group_size
-        :rtype: int, int
+        :param str group_size: group size.
         """
 
-        group_size = int(GROUP_SIZE)
-        if group_size != GROUP_SIZE:
-            raise ValueError('"GROUP_SIZE" must be an integer.')
+        if not group_size or not group_size.isdigit():
+            raise ValueError('Group size is invalid.')
 
+        group_size = int(group_size)
         if group_size <= 0:
-            raise ValueError('"GROUP_SIZE" must be a positive number.')
+            raise ValueError('Group size must be a positive integer.')
 
         if self._extractor.count < group_size:
-            raise ValueError(f'"GROUP_SIZE" can not be bigger than entries '
+            raise ValueError(f'Group size can not be bigger than entries '
                              f'count which is [{self._extractor.count}]')
 
         if self._extractor.count % group_size != 0:
@@ -182,12 +187,16 @@ class Manager:
                                      f'the same restricted level can not be put in '
                                      f'the same group.')
 
-        return total_groups, group_size
+        self._group_size = group_size
+        self._total_groups = total_groups
 
     def _confirm(self):
         """
         confirms the drawing.
         """
+
+        group_size = input('Please enter the group size:\n')
+        self._validate(group_size)
 
         print('*' * 200)
         print('Total Entry Count:')
@@ -214,9 +223,9 @@ class Manager:
 
         if self._extractor.has_restricted:
             for level, items in self._extractor.restricted_entries.items():
-                sources = list(items)
+                sources = list(set(items).difference(set(picked)))
                 for group in groups:
-                    if len(sources) <= 0:
+                    if not sources:
                         break
 
                     if group.is_full or group.has_restricted(level):
@@ -229,29 +238,35 @@ class Manager:
 
         if self._extractor.has_optional:
             for level, items in self._extractor.optional_entries.items():
-                sources = list(items)
+                sources = list(set(items).difference(set(picked)))
                 for group in groups:
-                    if len(sources) <= 0:
+                    if not sources:
                         break
 
                     if group.is_full or group.has_optional(level):
                         continue
 
                     selected = random.choice(sources)
+                    if group.has_restricted(selected.restricted_level):
+                        continue
+
                     group.add(selected)
                     picked.append(selected)
                     sources.remove(selected)
 
-        sources = list(self._extractor.entries)
+        sources = list(set(self._extractor.entries).difference(set(picked)))
         while len(picked) < self._extractor.count:
             for group in groups:
-                if len(sources) <= 0:
+                if not sources:
                     break
 
                 if group.is_full:
                     continue
 
                 selected = random.choice(sources)
+                if group.has_restricted(selected.restricted_level):
+                    continue
+
                 group.add(selected)
                 picked.append(selected)
                 sources.remove(selected)
@@ -268,7 +283,7 @@ class Manager:
         print('*' * 200)
         print('Performing The Draw...')
         print('*' * 200)
-        print('Drawing Results:')
+        print('Draw Results:')
         for item in groups:
             print('*' * 100)
             print(str(item))

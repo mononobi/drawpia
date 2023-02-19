@@ -176,7 +176,6 @@ class Extractor:
         if not os.path.isfile(file_path):
             raise ValueError(f'The required file [{file_path}] does not exist.')
 
-        enforced_len = None
         # keeps a list of all entries.
         entries = []
         # keeps a dict of different entries based on their restricted levels.
@@ -191,27 +190,31 @@ class Extractor:
         with open(file_path) as file:
             lines = file.readlines()
             for index, item in enumerate(lines):
-                if not item or item.isspace():
+                if not item or not item.strip() or item.strip().isspace():
                     continue
 
                 parts = item.split(SEP)
-                name, restricted_level, optional_level = None, None, None
+                name = None
+                restricted_level = None
+                optional_level = None
                 if len(parts) == 3:
-                    name, restricted_level, optional_level = parts
+                    name = parts[0].strip()
+                    restricted_level = parts[1].strip()
+                    optional_level = parts[2].strip()
 
                 elif len(parts) == 2:
-                    name, restricted_level = parts
+                    name = parts[0].strip()
+                    restricted_level = parts[1].strip()
 
                 elif len(parts) == 1:
-                    name = parts[0]
+                    name = parts[0].strip()
 
                 else:
-                    ValueError(f'Invalid entry found: [{item}]')
+                    ValueError(f'Invalid entry found: [{item.rstrip()}]')
 
                 if not name or name.isspace():
-                    raise ValueError(f'Invalid name found for entry: [{index + 1}-{item}]')
-
-                name = name.strip()
+                    raise ValueError(f'Invalid name found for entry: '
+                                     f'[{index + 1}-{item.rstrip()}]')
 
                 if restricted_level and not restricted_level.isspace():
                     restricted_level = restricted_level.strip()
@@ -222,23 +225,6 @@ class Extractor:
                     optional_level = optional_level.strip()
                 else:
                     optional_level = None
-
-                current_len = 0
-                if name:
-                    current_len += 1
-
-                if restricted_level:
-                    current_len += 1
-
-                if optional_level:
-                    current_len += 1
-
-                if enforced_len is None:
-                    enforced_len = current_len
-
-                if current_len != enforced_len:
-                    raise ValueError(f'All entries should have [{enforced_len}] '
-                                     f'parts as the first entry.')
 
                 entry = Entry(name, index + 1,
                               restricted_level=restricted_level,
