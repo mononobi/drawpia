@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import time
 import random
 
 from drawpia.extractor import Extractor, Entry
@@ -328,9 +329,13 @@ class Manager:
         """
 
         self._confirm()
+        start = time.time()
         groups = self._draw()
+        end = time.time()
+        duration = '{:0.2f}'.format((end - start) * 1000)
         print('*' * 200)
         print('Performing The Draw...')
+        print(f'Drawing took [{duration}] ms')
         print('*' * 200)
         print('Draw Results:')
         for item in groups:
