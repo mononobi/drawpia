@@ -1,0 +1,63 @@
+####################### EUROPE #######################
+
+AUSTRIA[***]Europe
+BELGIUM[***]Europe
+CROATIA[***]Europe
+CZECH REPUBLIC[***]Europe
+DENMARK[***]Europe
+ENGLAND[***]Europe
+FRANCE[***]Europe
+GERMANY[***]Europe
+IRELAND[***]Europe
+ITALY[***]Europe
+NETHERLANDS[***]Europe
+POLAND[***]Europe
+PORTUGAL[***]Europe
+SPAIN[***]Europe
+SWEDEN[***]Europe
+TURKEY[***]Europe
+UKRAINE[***]Europe
+WALES[***]Europe
+
+####################### Africa #######################
+
+ALGERIA[***]Africa
+CAMEROON[***]Africa
+CÔTE D'IVOIRE[***]Africa
+EGYPT[***]Africa
+GHANA[***]Africa
+MOROCCO[***]Africa
+NIGERIA[***]Africa
+SENEGAL[***]Africa
+SOUTH AFRICA[***]Africa
+TUNISIA[***]Africa
+
+####################### NORTH AMERICA #######################
+
+COSTA RICA[***]North America
+MEXICO[***]North America
+USA[***]North America
+JAMAICA[***]North America
+HONDURAS[***]North America
+
+####################### SOUTH AMERICA #######################
+
+ARGENTINA[***]South America
+BRAZIL[***]South America
+CHILE[***]South America
+COLOMBIA[***]South America
+ECUADOR[***]South America
+PARAGUAY[***]South America
+URUGUAY[***]South America
+
+####################### ASIA #######################
+
+AUSTRALIA[***]Asia
+IRAN[***]Asia
+IRAQ[***]Asia
+JAPAN[***]Asia
+QATAR[***]Asia
+REPUBLIC OF KOREA[***]Asia
+SAUDI ARABIA[***]Asia
+UNITED ARAB EMIRATES[***]Asia
+UZBEKISTAN[***]Asia
