@@ -1,0 +1,35 @@
+ARGENTINA[***]1[***]South America
+BRAZIL[***]1[***]South America
+ENGLAND[***]1[***]Europe
+FRANCE[***]1[***]Europe
+GERMANY[***]1[***]Europe
+NETHERLANDS[***]1[***]Europe
+PORTUGAL[***]1[***]Europe
+SPAIN[***]1[***]Europe
+
+ITALY[***]2[***]Europe
+URUGUAY[***]2[***]South America
+BELGIUM[***]2[***]Europe
+CROATIA[***]2[***]Europe
+POLAND[***]2[***]Europe
+CHILE[***]2[***]South America
+COLOMBIA[***]2[***]South America
+MEXICO[***]2[***]North America
+
+JAPAN[***]3[***]Asia
+REPUBLIC OF KOREA[***]3[***]Asia
+GHANA[***]3[***]Africa
+ALGERIA[***]3[***]Africa
+MOROCCO[***]3[***]Africa
+WALES[***]3[***]Europe
+DENMARK[***]3[***]Europe
+USA[***]3[***]North America
+
+AUSTRALIA[***]4[***]Asia
+IRAN[***]4[***]Asia
+SAUDI ARABIA[***]4[***]Asia
+COSTA RICA[***]4[***]North America
+EGYPT[***]4[***]Africa
+TUNISIA[***]4[***]Africa
+TURKEY[***]4[***]Europe
+UKRAINE[***]4[***]Europe
